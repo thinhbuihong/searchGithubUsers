@@ -1,7 +1,58 @@
-import React from 'react';
+// STEP 1 - Include Dependencies
+// Include react
+import React from "react";
+// Include the react-fusioncharts component
+import ReactFC from "react-fusioncharts";
 
-const Doughnut2d = () => {
-  return <div>chart</div>;
-};
+// Include the fusioncharts library
+import FusionCharts from "fusioncharts";
 
-export default Doughnut2d;
+// Include the chart type
+import Chart from "fusioncharts/fusioncharts.charts";
+
+// Include the theme as fusion
+import FusionTheme from "fusioncharts/themes/fusioncharts.theme.candy";
+
+// Adding the chart and theme as dependency to the core fusioncharts
+ReactFC.fcRoot(FusionCharts, Chart, FusionTheme);
+
+// STEP 2 - Chart Data
+
+
+// STEP 3 - Creating the JSON object to store the chart configurations
+
+const ChartComponent = ({ data }) => {
+  const chartConfigs = {
+    type: "doughnut2d", // The chart type
+    width: "100%", // Width of the chart
+    height: "400", // Height of the chart
+    dataFormat: "json", // Data type
+    dataSource: {
+      // Chart Configuration
+      chart: {
+        //Set the chart caption
+        caption: "Stars Per Language",
+        //Set the chart subcaption
+        // subCaption: "In MMbbl = One Million barrels",
+        //Set the x-axis name
+        // xAxisName: "Country",
+        //Set the y-axis name
+        // yAxisName: "Reserves (MMbbl)",
+        // numberSuffix: "K",
+        //Set the theme for your chart
+        theme: "candy",
+        decimals: 0,
+        // pieRadius: "35%",
+        doughnutRadius: '45%',
+        showPercentValue: 0,
+      },
+      // Chart Data
+      data: data,
+    }
+  };
+
+  return <ReactFC {...chartConfigs} />
+}
+// STEP 4 - Creating the DOM element to pass the react-fusioncharts component
+
+export default ChartComponent;
